@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Created by Osman Balci on 2025.9.3
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<!-- Do not enter tags before the composition line since they are ignored by JF -->
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="Fitness Videos"/>
+    </ui:define>
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+
+        <div align="center">
+            <h:form id="VideoListForm">
+                <span class="title">Fitness Videos</span>
+                <br /><br />
+                <table width="60%" border="0" align="center" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td valign="middle"><p:graphicImage url="https://i1.ytimg.com/vi/H_a7Z9u5NyI/mqdefault.jpg" width="100px"/> </td>
+                        <td valign="middle">How to Start a Workout on Apple Watch</td>
+                        <td valign="middle">
+                            <p:commandButton value="Play" icon="fas fa-play" styleClass="rounded-button"
+                                             actionListener="#{videoController.setYouTubeVideoId('H_a7Z9u5NyI')}"
+                                             update=":VideoPlayerForm" oncomplete="PF('VideoPlayerDialog').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle"><p:graphicImage url="https://i1.ytimg.com/vi/5mCcUndJMo8/mqdefault.jpg" width="100px"/> </td>
+                        <td valign="middle">30 Minute Bodyweight Cardio Workout with High and Low Impact Modifications</td>
+                        <td valign="middle">
+                            <p:commandButton value="Play" icon="fas fa-play" styleClass="rounded-button"
+                                             actionListener="#{videoController.setYouTubeVideoId('5mCcUndJMo8')}"
+                                             update=":VideoPlayerForm" oncomplete="PF('VideoPlayerDialog').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle"><p:graphicImage url="https://i1.ytimg.com/vi/QRZcZgSgSHI/mqdefault.jpg" width="100px"/> </td>
+                        <td valign="middle">30-Minute Strong by Zumba Cardio and Full-Body Toning Workout</td>
+                        <td valign="middle">
+                            <p:commandButton value="Play" icon="fas fa-play" styleClass="rounded-button"
+                                             actionListener="#{videoController.setYouTubeVideoId('QRZcZgSgSHI')}"
+                                             update=":VideoPlayerForm" oncomplete="PF('VideoPlayerDialog').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle"><p:graphicImage url="https://i1.ytimg.com/vi/CPI_Ve7vsHs/mqdefault.jpg" width="100px"/> </td>
+                        <td valign="middle">New Full Body HIIT Workout to lose Weight – Flat Stomach Challenge</td>
+                        <td valign="middle">
+                            <p:commandButton value="Play" icon="fas fa-play" styleClass="rounded-button"
+                                             actionListener="#{videoController.setYouTubeVideoId('CPI_Ve7vsHs')}"
+                                             update=":VideoPlayerForm" oncomplete="PF('VideoPlayerDialog').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle"><p:graphicImage url="https://i1.ytimg.com/vi/T4H0iwW_g0E/mqdefault.jpg" width="100px"/> </td>
+                        <td valign="middle">30 Min Banded Pilates Booty and Abs Workout</td>
+                        <td valign="middle">
+                            <p:commandButton value="Play" icon="fas fa-play" styleClass="rounded-button"
+                                             actionListener="#{videoController.setYouTubeVideoId('T4H0iwW_g0E')}"
+                                             update=":VideoPlayerForm" oncomplete="PF('VideoPlayerDialog').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle"><p:graphicImage url="https://i1.ytimg.com/vi/Y6Td_0RPH5k/mqdefault.jpg" width="100px"/> </td>
+                        <td valign="middle">Yoga Routine For Strength and Flexibility All Levels</td>
+                        <td valign="middle">
+                            <p:commandButton value="Play" icon="fas fa-play" styleClass="rounded-button"
+                                             actionListener="#{videoController.setYouTubeVideoId('Y6Td_0RPH5k')}"
+                                             update=":VideoPlayerForm" oncomplete="PF('VideoPlayerDialog').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle"><p:graphicImage url="https://i1.ytimg.com/vi/M0uO8X3_tEA/mqdefault.jpg" width="100px"/> </td>
+                        <td valign="middle">20 Minute Full Body Cardio HIIT Workout</td>
+                        <td valign="middle">
+                            <p:commandButton value="Play" icon="fas fa-play" styleClass="rounded-button"
+                                             actionListener="#{videoController.setYouTubeVideoId('M0uO8X3_tEA')}"
+                                             update=":VideoPlayerForm" oncomplete="PF('VideoPlayerDialog').show()" />
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </h:form>
+
+        </div>
+
+        <!-- Clicking the Play button displays the included YouTubeVideoPlayer.xhtml file in a dialog box on top of this page. -->
+        <ui:include src="/video/YouTubeVideoPlayer.xhtml"/>
+
+    </ui:define>
+
+</ui:composition>
+<!-- Do not enter tags after the composition line since they are ignored by JF -->
+
+</html>

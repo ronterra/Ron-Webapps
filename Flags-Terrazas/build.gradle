@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'edu.vt'
+version '1.0'
+
+repositories {
+    // Default Maven Central repository
+    mavenCentral()
+
+    // flat filesystem directory containing the PrimeFaces JAR file
+    flatDir {
+        // For Mac or Linux. For Windows, start the path with C:
+        dirs '/Users/ront/IdeaProjects/Flags-Terrazas/src/main/webapp/WEB-INF/lib'
+    }
+}
+
+dependencies {
+    // Jakarta EE 11 dependency
+    compileOnly group: 'jakarta.platform', name: 'jakarta.jakartaee-api', version: '11.0.0'
+
+    // primefaces-15.0.6-jakarta is located in the flat filesystem directory defined above
+    // primefaces-15.0.6-jakarta provides UI components for Jakarta Faces
+    compileOnly group: 'org.primefaces', name: 'primefaces', version: '15.0.6-jakarta'
+
+    /*
+     compileOnly — for dependencies that are necessary to compile your production code
+                   but shouldn’t be part of the runtime classpath
+     implementation (supersedes compile) — used for compilation and runtime
+     runtimeOnly (supersedes runtime) — only used at runtime, not for compilation
+     */
+}

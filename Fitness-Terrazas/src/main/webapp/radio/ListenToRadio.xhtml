@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Created by Osman Balci on 2025.9.3
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets">
+
+<!-- Do not enter tags before the composition line since they are ignored by JF -->
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+        <div align="center" style="margin:auto; width:100%">
+            <span class="title">Radio Stations</span>
+            <br/><br/>
+            <!--
+            To find a radio station live streaming URL:
+            (1) Go to https://www.iheart.com/live/
+            (2) Select "All Cities" or a particular city and choose your Genre
+            (3) Click the radio station to stream
+            (4) Click the Share icon (up arrow from box)
+            (5) Obtain the streaming URL from the Embed Widget source code
+            -->
+            <table border="0" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td>
+                        <iframe class="radio-player"
+                                src="https://www.iheart.com/live/smooth-jazz-top-20-9761/?embed=true"
+                                frameborder="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe class="radio-player"
+                                src="https://www.iheart.com/live/hip-hop-top-20-4886/?embed=true"
+                                frameborder="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe class="radio-player"
+                                src="https://www.iheart.com/live/country-top-20-4882/?embed=true"
+                                frameborder="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe class="radio-player"
+                                src="https://www.iheart.com/live/pop-top-20-4878/?embed=true"
+                                frameborder="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe class="radio-player"
+                                src="https://www.iheart.com/live/rock-top-20-4932/?embed=true"
+                                frameborder="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe class="radio-player"
+                                src="https://www.iheart.com/live/dance-top-20-9762/?embed=true"
+                                frameborder="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe class="radio-player"
+                                src="https://www.iheart.com/live/alt-top-20-9759/?embed=true"
+                                frameborder="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe class="radio-player"
+                                src="https://www.iheart.com/live/iheartclassical-6377/?embed=true"
+                                frameborder="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <iframe class="radio-player"
+                                src="https://www.iheart.com/live/iheart80s-5060/?embed=true"
+                                frameborder="0" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </ui:define>
+
+</ui:composition>
+<!-- Do not enter tags after the composition line since they are ignored by JF -->
+
+</html>

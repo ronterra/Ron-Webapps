@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Created by Osman Balci on 2025.8.28
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+<!-- Do not enter tags before the composition line since they are ignored by JF -->
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="Loan Request"/>
+    </ui:define>
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+        <div align="center">
+            <h:form id="LoanDataForm">
+                <br/>
+                <!-- The image is styled to decrease in size as the page width decreases -->
+                <h:graphicImage value="#{resource['images:LoanApplication.jpg']}" class="scalableImage"/>
+                <br/><br/>
+                <h1>Enter Your Auto Loan Data</h1>
+                <br/>
+                <!--
+                decimalPlaces="0"   sets the inputNumber to be integer allowing only numbers to be entered
+                decimalPlaces="N"   sets the inputNumber to be real with N decimal places allowing only numbers and period to be entered
+                symbolPosition="p"  symbol is shown as prefix, before the number
+                symbolPosition="s"  symbol is shown as suffix, after the number
+                class               specifies the name of the style defined in the CSS file siteStyles.css
+                -->
+                <table border="0" align="center" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap">
+                            <p:outputLabel for="principalAmount" value="Principal Amount Borrowed:" class="fieldLabel"/>
+                        </td>
+                        <td align="left" valign="middle">
+                            <p:inputNumber id="principalAmount"
+                                           value="#{autoLoanController.principalAmount}"
+                                           decimalPlaces="0" thousandSeparator=","
+                                           symbol="$" symbolPosition="p"
+                                           required="true" requiredMessage="Please Enter Principal Amount Borrowed!">
+                                <f:validateDoubleRange minimum="1000" maximum="1000000"/>
+                            </p:inputNumber>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap">
+                            <p:outputLabel for="interestRatePercent" value="Interest Rate Percentage:" class="fieldLabel"/>
+                        </td>
+                        <td align="left" valign="middle">
+                            <p:inputNumber id="interestRatePercent"
+                                           value="#{autoLoanController.interestRatePercent}"
+                                           decimalPlaces="3"
+                                           symbol="%" symbolPosition="s"
+                                           required="true" requiredMessage="Please Enter Interest Rate Percentage!">
+                                <f:validateDoubleRange minimum="0.25" maximum="30.00"/>
+                            </p:inputNumber>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap">
+                            <p:outputLabel for="numberOfYears" value="Number of Years:" class="fieldLabel"/>
+                        </td>
+                        <td align="left" valign="middle">
+                            <p:inputNumber id="numberOfYears"
+                                           value="#{autoLoanController.numberOfYears}"
+                                           decimalPlaces="2"
+                                           required="true" requiredMessage="Please Enter Number of Years!">
+                                <f:validateDoubleRange minimum="1" maximum="30"/>
+                            </p:inputNumber>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br/><br/>
+                <p:commandButton value="Calculate Loan" icon="fas fa-calculator" styleClass="rounded-button"
+                                 ajax="false" action="#{autoLoanController.calculateLoan()}"/>
+                &nbsp;
+                <p:commandButton value="Clear" icon="fas fa-undo" styleClass="ui-button-outlined"
+                                 ajax="false" immediate="true"
+                                 actionListener="#{autoLoanController.clear()}">
+
+                    <p:resetInput target="LoanDataForm"/>
+                </p:commandButton>
+            </h:form>
+        </div>
+        <br/><br/>
+    </ui:define>
+
+</ui:composition>
+<!-- Do not enter tags after the composition line since they are ignored by JF -->
+
+</html>

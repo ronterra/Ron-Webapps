@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Created by Osman Balci on 2025.9.3
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="jakarta.tags.core">
+
+<!-- Do not enter tags before the composition line since they are ignored by JF -->
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="Results"/>
+    </ui:define>
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+        <div align="center">
+            <h:form id="bmiResultsForm">
+                <p:outputPanel id="printContent">
+                    <!-- Center Print Content -->
+                    <div align="center">
+                    <br/>
+                    <span class="title">Body Mass Index (BMI)</span>
+                    <br/><br/>
+                    <!--
+                    Display the BMI category image based on the bmiCategory value.
+                    The $ sign requests immediate execution of the expression language statement
+                    -->
+                    <c:if test="${personController.bmiCategory == 'Underweight'}">
+                        <h:graphicImage url="#{resource['images:bmi/underweight.png']}" height="300px"/>
+                    </c:if>
+                    <c:if test="${personController.bmiCategory == 'Normal Weight'}">
+                        <h:graphicImage url="#{resource['images:bmi/normal.png']}" height="300px"/>
+                    </c:if>
+                    <c:if test="${personController.bmiCategory == 'Overweight'}">
+                        <h:graphicImage url="#{resource['images:bmi/overweight.png']}" height="300px"/>
+                    </c:if>
+                    <c:if test="${personController.bmiCategory == 'Obese'}">
+                        <h:graphicImage url="#{resource['images:bmi/obese.png']}" height="300px"/>
+                    </c:if>
+                    <c:if test="${personController.bmiCategory == 'Extremely Obese'}">
+                        <h:graphicImage url="#{resource['images:bmi/extremelyObese.png']}" height="300px"/>
+                    </c:if>
+                    <br/><br/>
+                    <h1>Your BMI value is #{personController.bmiValue}</h1>
+                    <h1>You are #{personController.bmiCategory}!</h1>
+                    </div>
+                </p:outputPanel>
+                <br/><br/>
+                <!--
+                *********************
+                *   EMAIL Button   *
+                *********************
+                -->
+                <!--
+                This PrimeFaces p:commandButton performs the form submission and invokes the
+                prepareEmailBody() method of the CDI-managed bean @Named personController
+                object on the server side. The prepareEmailBody() method composes the initial
+                content of the email message and shows the Email.xhtml facelets page.
+
+                p:commandButton does the form submission by initiating HTTP request/response cycle from within this JF page.
+
+                ajax="false" implies that only the HTTP request will be processed and no response will come to this page.
+                -->
+                <p:commandButton value="Email BMI Results" icon="far fa-envelope" styleClass="rounded-button"
+                                 ajax="false" action="#{personController.prepareEmailBody()}"/>
+                &nbsp;&nbsp;
+                <!--
+                **********************
+                *    PRINT Button    *
+                **********************
+                -->
+                <p:commandButton value="Print BMI Results" type="button" icon="fas fa-print" styleClass="rounded-button">
+                    <p:printer target="printContent"
+                               configuration="globalStyles: true, title: 'BMI Results', timeout: 1000"/>
+                </p:commandButton>
+                &nbsp;&nbsp;
+                <!--
+                *********************
+                *    BACK Button    *
+                *********************
+                -->
+                <!-- BACK button: Clicking the Back button displays the Calculate.xhtml page -->
+                <p:button outcome="/bmi/Calculate" value="Back" icon="fas fa-arrow-left"
+                          styleClass="ui-button-outlined"/>
+            </h:form>
+            <br/><br/>
+        </div>
+    </ui:define>
+
+</ui:composition>
+<!-- Do not enter tags after the composition line since they are ignored by JF -->
+
+</html>
