@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - Created by Osman Balci on 2025.9.22
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+    <!--
+    =======================================================
+    Dialog Showing YouTube Player to Play the Video with ID
+    =======================================================
+    -->
+    <p:dialog id="MovieTrailerPlayDlg" header="Play Movie Trailer" widgetVar="MovieTrailerPlayDialog"
+              modal="true" position="center" appendTo="@(body)" width="70%"
+              showEffect="slide" hideEffect="fade" responsive="true">
+
+        <h:form id="MovieTrailerPlayForm">
+
+            <div align="center">
+                <br />
+                <div class="responsive-container">
+                    <iframe class="responsive-iframe"
+                            src="https://www.youtube.com/embed/#{movieController.idOfVideoToPlay}">
+                    </iframe>
+                </div>
+                <br />
+                <!-- CLOSE button -->
+                <p:commandButton value="Close" icon="fas fa-window-close" styleClass="ui-button-outlined"
+                                 onclick="PF('MovieTrailerPlayDialog').hide()" />
+            </div>
+        </h:form>
+    </p:dialog>
+
+</ui:composition>
+</html>
+
+
+
+
+
+

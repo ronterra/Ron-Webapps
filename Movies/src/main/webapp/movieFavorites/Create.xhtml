@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - Created by Osman Balci on 2025.9.22
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui" >
+
+<ui:composition>
+    <!--
+    ============================================================
+    |  Clicking the CREATE button displays this Dialog window  |
+    |  for the user to enter the data to create a new movie.   |
+    ============================================================
+    -->
+    <p:dialog id="MovieCreateDlg" header="Create New Movie" widgetVar="MovieCreateDialog"
+              modal="true" position="center" appendTo="@(body)" width="50%" height="400"
+              showEffect="slide" hideEffect="fade" responsive="true">
+
+        <!-- class="ui-datatable-data" in siteStyles reduces row paddings -->
+        <h:form id="MovieCreateForm" class="ui-datatable-data">
+            <h:panelGroup id="display">
+                <!--
+                When the user clicks the CREATE button in List.xhtml, actionListener="#{movieController.prepareCreate}"
+                executes the prepareCreate method in which a new Movie object is instantiated and its object reference
+                is stored in the "selected" instance variable. Thus, "selected" points to a newly created Movie object
+                with property (instance variable) values set to empty or null. The inputText data fields below are
+                intended to assign user-provided values to the properties of the newly created Movie object.
+                -->
+                <table border="0" align="center" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                            <p:outputLabel value="Movie Title:" for="title" />
+                        </td>
+                        <td align="left" valign="middle" bgcolor="oldlace" width="100%">
+                            <p:inputText id="title" value="#{movieController.selected.title}" style="width:100%"
+                                         required="true" requiredMessage="Movie Title is required!"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                            <p:outputLabel value="YouTube Movie Trailer ID:" for="youTubeID" />
+                        </td>
+                        <td align="left" valign="middle" bgcolor="oldlace">
+                            <p:inputText id="youTubeID" value="#{movieController.selected.youtubeTrailerId}"
+                                         required="true" requiredMessage="YouTube Movie Trailer ID is required!"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                            <p:outputLabel value="MPAA Rating:" for="filmRating" />
+                        </td>
+                        <td align="left" valign="middle" bgcolor="oldlace" width="100%">
+                            <p:selectOneMenu id="filmRating" value="#{movieController.selected.filmRating}"
+                                             required="true" requiredMessage="Please select an MPAA rating!" >
+                                <f:selectItem itemLabel="Select One" itemValue=""/>
+                                <f:selectItem itemLabel="G" itemValue="G"/>
+                                <f:selectItem itemLabel="PG" itemValue="PG"/>
+                                <f:selectItem itemLabel="PG-13" itemValue="PG-13"/>
+                                <f:selectItem itemLabel="R" itemValue="R"/>
+                                <f:selectItem itemLabel="NC-17" itemValue="NC-17"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                            <p:outputLabel value="Genres:" for="genres" />
+                        </td>
+                        <td align="left" valign="middle" bgcolor="oldlace" width="100%">
+                            <p:inputText id="genres" value="#{movieController.selected.genres}" style="width:100%"
+                                         required="true" requiredMessage="Genres is required!"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                            <p:outputLabel value="Release Date:" for="date" />
+                        </td>
+                        <td align="left" valign="middle" bgcolor="oldlace" width="100%">
+                            <!--
+                            Date is stored in the database in the format YYYY-MM-DD so that it is sortable.
+                            However, we ask the user to enter the date as MM/DD/YYYY since it is the familiar format.
+                            MovieController's movieReleaseDate Getter and Setter methods are used for date type conversion.
+                            -->
+                            <p:calendar id="date" pattern="MM/dd/yyyy" mask="true"
+                                        value="#{movieController.movieReleaseDate}"
+                                        required="true" requiredMessage="Release Date is required!" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                            <p:outputLabel value="Director(s):" for="director" />
+                        </td>
+                        <td align="left" valign="middle" bgcolor="oldlace" width="100%">
+                            <p:inputText id="director" value="#{movieController.selected.director}" style="width:100%"
+                                         required="true" requiredMessage="Director(s) is required!" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                            <p:outputLabel value="Top Stars:" for="stars" />
+                        </td>
+                        <td align="left" valign="middle" bgcolor="oldlace" width="100%">
+                            <p:inputText id="stars" value="#{movieController.selected.stars}" style="width:100%"
+                                         required="true" requiredMessage="Top Stars is required!" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                            <p:outputLabel value="Percent Liked:" for="percentLiked" />
+                        </td>
+                        <td align="left" valign="middle" bgcolor="oldlace" width="100%">
+                            <p:inputMask id="percentLiked" value="#{movieController.selected.percentLiked}"
+                                         mask="99%"
+                                         required="true" requiredMessage="Percent Liked is required!"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </h:panelGroup>
+            <br /><br />
+            <h:panelGroup>
+                <div align="center">
+                    <!-- SAVE button -->
+                    <p:commandButton value="Save" icon="fas fa-save" styleClass="rounded-button"
+                                     ajax="false" actionListener="#{movieController.create()}"
+                                     update="display,:MovieListForm:datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage"
+                                     oncomplete="handleSubmit(args,'MovieCreateDialog');" />
+                    &nbsp;
+                    <!--
+                    CANCEL button: Call the cancel() method immediately without first rendering this JSF page.
+                    The cancel() method will make the selected country object null and show the List page.
+                    -->
+                    <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                     action="#{movieController.cancel()}" ajax="false" immediate="true"
+                                     onclick="PF('MovieCreateDialog').hide()" />
+                </div>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+</ui:composition>
+</html>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - Created by Osman Balci on 2025.9.22
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+    <!--
+    ==========================================================
+    |  Clicking the VIEW button displays this Dialog window  |
+    |  for the user to view the selected movie's data.       |
+    ==========================================================
+    height="400" makes the dialog window to be vertically scrollable
+    width="50%" and responsive="true" make the dialog window horizontally responsive
+    class="scalableImage" makes the displayed image responsive
+    -->
+    <p:dialog id="MovieViewDlg" header="View Movie" widgetVar="MovieViewDialog"
+              modal="true" position="center" appendTo="@(body)" width="50%" height="400"
+              showEffect="slide" hideEffect="fade" responsive="true">
+
+        <h:form id="MovieViewForm" class="ui-datatable-data">
+            <div align="center">
+                <h:graphicImage
+                        value="https://i1.ytimg.com/vi/#{movieController.selected.youtubeTrailerId}/mqdefault.jpg"
+                        class="scalableImage"/>
+                <br/><br/>
+                <h:panelGroup id="display">
+                    <table border="1" align="center" cellpadding="5" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Movie Title:"/>
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{movieController.selected.title}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <p:outputLabel value="YouTube Movie Trailer ID:"/>
+                            </td>
+                            <td align="left" valign="middle"  bgcolor="oldlace">
+                                <h:outputText value="#{movieController.selected.youtubeTrailerId}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Genres:"/>
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{movieController.selected.genres}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Release Date:"/>
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{movieController.selected.releaseDate}">
+                                    <!--
+                                    Date is stored in the database in the format YYYY-MM-DD so that it is sortable.
+                                    For display purposes, we convert the database format to MM/DD/YYYY.
+                                    -->
+                                    <f:convertDateTime pattern="MM/dd/yyyy"/>
+                                </h:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Director(s):"/>
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{movieController.selected.director}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Top Stars:"/>
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{movieController.selected.stars}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="MPAA Rating:"/>
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{movieController.selected.filmRating}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Percent Liked:"/>
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{movieController.selected.percentLiked}"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+            </div>
+            <br/><br/>
+            <h:panelGroup>
+                <div align="center">
+                    <!-- CLOSE button -->
+                    <p:commandButton value="Close" icon="fas fa-window-close" styleClass="ui-button-outlined"
+                                     onclick="PF('MovieViewDialog').hide()"/>
+                </div>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
+</ui:composition>
+</html>

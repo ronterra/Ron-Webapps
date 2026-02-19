@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Created by Osman Balci on 2025.9.22
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui" >
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+            <div id="posterFrame" align="center" >
+                <h1>Currently Playing Movies Poster Carousel</h1>
+                <p:carousel value="#{currentMovieController.listOfCurrentMovies}" var="aCurrentMovie">
+                    <p:graphicImage url="http://image.tmdb.org/t/p/w300#{aCurrentMovie.posterFileName}" width="40%"/>
+                    <br /><br />
+                    <h:outputText value="#{aCurrentMovie.title}" />
+                </p:carousel>
+                <!--
+                The Carousel displays Indicators on the bottom. Indicators are buttons with rectangle images.
+                Clicking an Indicator button displays its image.
+                -->
+            </div>
+        </ui:define>
+
+    </ui:composition>
+    <!-- Do not enter tags after the composition line since they are ignored by JSF -->
+
+</html>
