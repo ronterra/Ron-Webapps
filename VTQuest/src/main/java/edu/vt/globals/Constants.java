@@ -32,7 +32,7 @@ public class Constants {
     5. Enable the APIs listed above.
     ============================================================================================
      */
-    public static final String GOOGLE_API_KEY = "AIzaSyCVX5uUXdQnd2W8u9XWUH4KVu71fLJa65g";
+    public static final String GOOGLE_API_KEY = "";
 
     // Virginia Tech Campus Center Geolocation
     public static final BigDecimal VT_MAP_CENTER_LATITUDE = BigDecimal.valueOf(37.227264);
