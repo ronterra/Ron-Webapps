@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Created by Osman Balci on 2025.9.26
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="Recover Account"/>
+    </ui:define>
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+        <div align="center">
+            <h1>Sign In</h1>
+            <br/>
+            <h:form>
+                <!--
+                ================================
+                |    Username and Password     |
+                ================================
+                -->
+                <table border="0" align="center" cellpadding="5" cellspacing="0">
+                <tbody>
+                <tr>
+                    <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                        <p:outputLabel value="Username:" for="username"/>
+                    </td>
+                    <td align="left" valign="middle" nowrap="nowrap" bgcolor="oldlace">
+                        <p:inputText id="username" value="#{accountRecoveryManager.username}" style="width: 290px"
+                                     required="true" requiredMessage="Username is required.">
+                        </p:inputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                        <p:outputLabel value="Password:" for="password"/>
+                    </td>
+                    <td align="left" valign="middle" nowrap="nowrap" bgcolor="oldlace">
+                        <p:password id="password" value="#{accountRecoveryManager.password}" style="width: 290px"
+                                    feedback="false">
+                        </p:password>
+                    </td>
+                </tr>
+                </tbody>
+                </table>
+                <br/>
+                <!--
+                ================================
+                |         SUBMIT Button        |
+                ================================
+                -->
+                <p:commandButton id="Submit" value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                 ajax="false" action="#{accountRecoveryManager.recoverAccount()}"
+                                 update=":growlInfoMessage, :growlErrorMessage, :growlFatalMessage, :growlWarningMessage"/>
+                &nbsp;
+                <!--
+                ================================
+                |        CANCEL Button         |
+                ================================
+                -->
+                <p:button outcome="/signIn/SignIn" value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"/>
+                <br/>
+            </h:form>
+            <br/><br/>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

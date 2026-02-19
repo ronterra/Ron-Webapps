@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'edu.vt'
+version '1.0'
+
+repositories {
+    // Default Maven Central repository
+    mavenCentral()
+
+    // flat filesystem directory containing the PrimeFaces JAR file
+    flatDir {
+        // For Mac or Linux. For Windows, start the path with C:
+        dirs '/Users/ront/IdeaProjects/CloudDrive-Terrazas/src/main/webapp/WEB-INF/lib'
+    }
+}
+
+dependencies {
+    // Jakarta EE 11 dependency
+    compileOnly group: 'jakarta.platform', name: 'jakarta.jakartaee-api', version: '11.0.0'
+
+    // primefaces-15.0.7.jar is located in the flat filesystem directory defined above
+    // primefaces-15.0.7.jar provides UI components for Jakarta Faces
+    compileOnly group: 'org.primefaces', name: 'primefaces', version: '15.0.7-jakarta'
+
+    // imgscalr-lib-4.2.jar is a simple and efficient best practice image-scaling and
+    // manipulation library implemented in pure Java
+    // imgscalr-lib-4.2.jar is located in the flat filesystem directory defined above
+    compileOnly group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+
+    // MySQL JDBC Connector to Java is configured in WildFly
+    compileOnly group: 'mysql', name: 'mysql-connector-j', version: '9.4.0'
+}
