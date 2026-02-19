@@ -1,0 +1,101 @@
+<!--
+  - Created by Osman Terrazas on 2025.10.16
+  - Copyright © 2025 Osman Terrazas. All rights reserved.
+  -->
+<!--
+=====================================================================
+|               Declaration of Time Spent in Learning               |
+=====================================================================
+Per Virginia Tech Undergraduate Honor Code, I pledge to conduct
+myself with honor and integrity at all times. I will not lie, cheat,
+or steal, nor will I accept the actions of those who do.
+
+I hereby declare on my honor that I spent
+
+      3 hours and 30 minutes
+
+in learning from this tutorial. I have accomplished
+the stated Learning Objectives of this tutorial.
+
+By writing my full name as my signature below,
+I hereby certify that the above statements are true and accurate.
+
+           Ronald Jeremy Terrazas
+=====================================================================
+-->
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>VT Buildings API</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        body {background-color: azure;}
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12pt;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            color: maroon;
+        }
+        .header {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            color: white;
+            text-align: center;
+            background: #1abc9c;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+<br />
+<div class="header">VT Buildings API</div>
+<h1>Description</h1>
+<p>This application uses the REpresentational State Transfer (REST) software architectural style to provide RESTful Web Services as an API.
+    It employs the Java platform <a href="https://jakarta.ee/specifications/restful-ws/" target="_blank">Jakarta RESTful Web Services</a><strong>.</strong> It returns data in the JavaScript Object Notation (JSON)
+    format from the <strong>VTBuildingsDB</strong> relational database. </p>
+<p>The created API for RESTful Web Services enables a software application to obtain data from the <strong>VTBuildingsDB</strong>
+    relational database in JSON format by using URLs under a predefined set of queries over the Internet.
+    Each of the following URLs is called an API query, API call or API RESTful web service.
+    JSON file returned from the API is intended for use only by a software application.
+    APIs, JSON files, or RESTful Web Services are created for use by software applications; not by human beings.</p>
+<h1>Testing</h1>
+<p>Click the following links to test the API while the app is running locally on your computer before deploying it to your server. After deployment to your server, replace http://3.140.244.9:8080 with your server's main URL.</p>
+<blockquote>
+    <p>Returns a JSON file containing the VT building whose Primary Key (id) is 50<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/50" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/50</a></p>
+    <p>Returns a JSON file containing all of the VT buildings<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/getAll" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/getAll</a></p>
+    <p>Returns a JSON file containing the total number of VT buildings in the database<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/count" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/count</a></p>
+    <p>Returns a JSON file containing the names of all VT buildings<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/names" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/names</a></p>
+    <p>Returns a JSON file containing the abbreviations of all VT building names<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/abbreviations" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/abbreviations</a></p>
+    <p>Returns a JSON file containing the categories of all VT buildings<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/categories" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/categories</a></p>
+    <p>Returns a JSON file listing all VT buildings whose name contains the query Mc<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/nameContains/Mc" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/nameContains/Mc</a></p>
+    <p>Returns a JSON file listing all VT buildings whose description contains the query science<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/descriptionContains/science" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/descriptionContains/science</a></p>
+    <p>Returns a JSON file listing all VT buildings whose abbreviation contains the query MC<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/abbreviationContains/MC" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/abbreviationContains/MC</a></p>
+    <p>Returns a JSON file listing all VT buildings whose category contains the query Acad<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/categoryContains/Acad" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/categoryContains/Acad</a></p>
+    <p>Returns a JSON file listing all VT buildings whose address contains the query Stan<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/addressContains/Stan" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/addressContains/Stan</a></p>
+    <p>Returns a JSON file listing all VT buildings built in the query year 1995<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/yearBuilt/1995" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/yearBuilt/1995</a></p>
+    <p>Returns a JSON file listing all VT buildings built between 1990 and 2000 inclusive<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/1990/2000" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/1990/2000</a></p>
+    <p>Returns a JSON file listing all VT buildings built between 2010 and 2020 inclusive and category contains the query acad<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/2010/2020/acad" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/2010/2020/acad</a></p>
+    <p>Returns a JSON file listing all VT buildings whose name OR description OR category OR address contains the query lane<br />
+        <a href="http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/eachContains/lane" target="_blank">http://3.140.244.9:8080/VTBuildingsAPI-Terrazas/api/vtBuildings/eachContains/lane</a></p>
+</blockquote>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>
