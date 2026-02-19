@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Osman Balci on 2025.10.15
+Copyright © 2025 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="Building Info" />
+    </ui:define>
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+        <div align="center">
+            <h:form>
+                <div>
+                    <h:outputText value="#{buildingController.selected.name}" class="headingText" />
+                    <br/><br/>
+                    <h:graphicImage url="https://manta.cs.vt.edu/csd/vtBuildingPhotos/#{buildingController.selected.imageFilename}.jpg" class="scalableImage"/>
+                    <br/><br/>
+                    <h:outputText value="Building Description" style="font-style: italic" />
+                    <br/><br/>
+                    <fieldset style="width: 50%">
+                        <h:outputText value="#{buildingController.selected.description}" styleClass="scrollableOutputText" />
+                    </fieldset>
+                </div>
+                <br/><br/>
+                <h:panelGroup id="display">
+                    <table border="1" align="center" cellpadding="5" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Abbreviation: " style="font-style: italic" />
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{buildingController.selected.abbreviation}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Category: " style="font-style: italic" />
+                            </td>
+                            <td align="left" valign="middle"  bgcolor="oldlace">
+                                <h:outputText value="#{buildingController.selected.category}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Year Built: " style="font-style: italic" />
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{buildingController.selected.yearBuilt}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" valign="middle" nowrap="nowrap" bgcolor="papayawhip">
+                                <h:outputText value="Address: " style="font-style: italic" />
+                            </td>
+                            <td align="left" valign="middle" bgcolor="oldlace">
+                                <h:outputText value="#{buildingController.selected.address}" />
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+                <br/><br/>
+                <p:commandButton value="&nbsp;Show on Map" icon="fas fa-map-location-dot" styleClass="rounded-button"
+                                 ajax="false" action="/vtBuilding/LocationOnMap?faces-redirect=true" />
+                <br/><br/>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

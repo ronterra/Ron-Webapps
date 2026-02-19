@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Osman Balci on 2025.10.15
+Copyright © 2025 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="jakarta.tags.core">
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="Search Results" />
+    </ui:define>
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+
+        <!-- In case of JSF validation error, set 'selected' to null in buildingController -->
+        <c:if test="#{facesContext.validationFailed}">
+            ${buildingController.unselect()}
+        </c:if>
+
+        <!-- Set 'selected' to null in buildingController when the user refreshes / reloads this JSF page -->
+        <f:metadata>
+            <f:viewAction action="#{buildingController.unselect()}" rendered="#{facesContext.postback}" />
+        </f:metadata>
+
+        <div align="center">
+            <h:form id="BuildingListForm">
+                <p:panel header="List of Virginia Tech Buildings Found">
+                    <p:dataTable id="datalist"
+                                 value="#{buildingController.vtBuildingsFound}"
+                                 var="aBuilding"
+                                 widgetVar="buildingsDataTable"
+                                 selectionMode="single"
+                                 selection="#{buildingController.selected}"
+                                 reflow="true"
+                                 showGridlines="false"
+                                 paginator="true"
+                                 rowKey="#{aBuilding.id}"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,15,20,30,40,50"
+                                 emptyMessage="No building found for the search query entered!" >
+
+                        <p:ajax event="rowSelect" update="viewButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton"/>
+
+                        <!--
+                        =================
+                        VT Building Image
+                        =================
+                        -->
+                        <p:column headerText="Image" style="width: 80px; text-align: center; vertical-align: top" >
+                            <div align="center">
+                                <h:graphicImage value="https://manta.cs.vt.edu/csd/vtBuildingPhotos/#{aBuilding.imageFilename}.jpg" width="80px" />
+                            </div>
+                        </p:column>
+
+                        <!--
+                        ================
+                        VT Building Name
+                        ================
+                        -->
+                        <p:column headerText="Building Name" sortBy="#{aBuilding.name}"
+                                  style="width: 120px; vertical-align: top" >
+                            <h:outputText value="#{aBuilding.name}"/>
+                        </p:column>
+
+                        <!--
+                        ====================
+                        VT Building Category
+                        ====================
+                        -->
+                        <p:column headerText="Building Category" sortBy="#{aBuilding.category}"
+                                  style="width: 100px; text-align: center; vertical-align: top" >
+                            <h:outputText value="#{aBuilding.category}"/>
+                        </p:column>
+
+                        <!--
+                        ========================
+                        VT Building Abbreviation
+                        ========================
+                        -->
+                        <p:column headerText="Abbreviation" sortBy="#{aBuilding.abbreviation}"
+                                  style="width: 80px; text-align: center; vertical-align: top" >
+                            <h:outputText value="#{aBuilding.abbreviation}"/>
+                        </p:column>
+
+                        <!--
+                        ======================
+                        VT Building Year Built
+                        ======================
+                        -->
+                        <p:column headerText="Year Built" sortBy="#{aBuilding.yearBuilt}"
+                                  style="width: 80px; text-align: center; vertical-align: top" >
+                            <h:outputText value="#{aBuilding.yearBuilt}"/>
+                        </p:column>
+
+                        <!--
+                        ===================
+                        VT Building Address
+                        ===================
+                        -->
+                        <p:column headerText="Building Address" sortBy="#{aBuilding.address}"
+                                  style="width: 120px; text-align: left; vertical-align: top" >
+                            <h:outputText value="#{aBuilding.address}"/>
+                        </p:column>
+
+                        <!--
+                        *************************
+                        *   Data Table Footer   *
+                        *************************
+                        -->
+                        <f:facet name="footer">
+                            <div align="center">
+                                <!-- VIEW Button -->
+                                <p:commandButton id="viewButton" value="View Selected" icon="fas fa-eye" styleClass="rounded-button"
+                                                 ajax="false"
+                                                 action="#{buildingController.displayBuildingInformation()}"
+                                                 disabled="#{empty buildingController.selected}"/>
+                                &nbsp;
+                                <p:commandButton value="&nbsp;Show All Found Buildings on Map" icon="fas fa-map-location-dot" styleClass="rounded-button"
+                                                 ajax="false" action="/vtSearch/LocationsOnMap?faces-redirect=true" />
+                                &nbsp;
+                                <!-- BACK Button -->
+                                <p:button outcome="/vtSearch/Search" value="Back" icon="fas fa-arrow-left" styleClass="ui-button-outlined" />
+                            </div>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

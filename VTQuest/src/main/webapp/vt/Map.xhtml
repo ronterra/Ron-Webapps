@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Osman Balci on 2025.10.15
+Copyright © 2025 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="VT Map" />
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <!--
+            The map is styled under class 'map' in siteStyles.css
+            
+            *****************************************************************************
+            NOTE: p:gmap will NOT work unless you specify your Google Maps JavaScript API
+            Developer Key in siteTemplate.xhtml. This is given in siteTemplate.xhtml
+            so that each page can use Google Maps JavaScript API.
+            *****************************************************************************
+            -->
+            <p:gmap center="37.227264, -80.420745" zoom="15" type="hybrid" class="map" />
+
+        </ui:define>
+    </ui:composition>
+</html>

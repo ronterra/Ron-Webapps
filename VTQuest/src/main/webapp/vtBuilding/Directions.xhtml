@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Osman Balci on 2025.10.15
+Copyright © 2025 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="VT Campus Directions" />
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+
+            <div align="center">
+                <br />
+                <span class="headingText">Directions on VT Campus</span>
+                <br /><br />
+                <h:form id="DirectionsForm">
+
+                    <h:panelGrid columns="2" columnClasses="panelGridColumn1, panelGridColumn2" 
+                                 cellpadding="10" cellspacing="3">
+
+                        <p:outputLabel value="From: " />
+                        <p:selectOneMenu value="#{buildingController.startingBuildingName}">
+                            <f:selectItems value="#{buildingController.listOfVTBuildingNames}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="To: " />
+                        <p:selectOneMenu value="#{buildingController.destinationBuildingName}">
+                            <f:selectItems value="#{buildingController.listOfVTBuildingNames}" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <br /><br />
+                    <span>Show Directions on Map via</span>
+                    <br /><br />
+                    <p:commandButton value="Walking" icon="fas fa-walking" styleClass="rounded-button" ajax="false"
+                                     action="#{buildingController.createStartAndDestinationPoints(0)}" />
+                    &nbsp;&nbsp;
+                    <p:commandButton value="Driving" icon="fas fa-car" styleClass="rounded-button" ajax="false"
+                                     action="#{buildingController.createStartAndDestinationPoints(1)}" />
+                    &nbsp;&nbsp;
+                    <p:commandButton value="&nbsp;Bicycling" icon="fas fa-bicycle" styleClass="rounded-button" ajax="false"
+                                     action="#{buildingController.createStartAndDestinationPoints(2)}" />
+                    &nbsp;&nbsp;
+                    <p:commandButton value="Transit" icon="fas fa-bus" styleClass="rounded-button" ajax="false"
+                                     action="#{buildingController.createStartAndDestinationPoints(3)}" />
+
+                    <br /><br /><br />
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

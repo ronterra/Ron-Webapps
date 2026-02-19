@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - Created by Osman Balci on 2025.10.15
+  - Copyright © 2025 Osman Balci. All rights reserved.
+  -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+
+<!-- This page is constructed based on the siteTemplate -->
+<ui:composition template="/template/siteTemplate.xhtml">
+
+    <ui:define name="title">
+        <!-- Set the page title -->
+        <h:outputText value="VT Search" />
+    </ui:define>
+
+    <!-- Create the content for this page below -->
+    <ui:define name="editableContent">
+
+        <h:form id="VTSearchForm">
+            <div align="center">
+                <h:graphicImage value="#{resource['images:apiSearchIcon.png']}"
+                                style="width: 200px" />
+                <br /><br />
+                <span class="headingText">Search VT Buildings Using VTBuildingsAPI</span>
+                <br /><br />
+                <table width="80%" border="1" align="center" cellpadding="5" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <th width="60" nowrap="nowrap" scope="col">Type</th>
+                        <th scope="col">Description</th>
+                        <th width="200" scope="col">Search</th>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">1</td>
+                        <td align="center">Find VT buildings whose names contain the entered query</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 1" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":VTSearchDlg1" oncomplete="PF('VTSearchDialog1').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">2</td>
+                        <td align="center">Find VT buildings whose descriptions contain the entered query</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 2" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":VTSearchDlg2" oncomplete="PF('VTSearchDialog2').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">3</td>
+                        <td align="center">Find VT buildings whose abbreviations contain the entered query</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 3" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":VTSearchDlg3" oncomplete="PF('VTSearchDialog3').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">4</td>
+                        <td align="center">Find VT buildings whose categories contain the entered query</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 4" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":VTSearchDlg4" oncomplete="PF('VTSearchDialog4').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">5</td>
+                        <td align="center">Find VT buildings whose addresses contain the entered query</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 5" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":VTSearchDlg5" oncomplete="PF('VTSearchDialog5').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">6</td>
+                        <td align="center">Find VT buildings built in the entered query year</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 6" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":VTSearchDlg6" oncomplete="PF('VTSearchDialog6').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">7</td>
+                        <td align="center">Find VT buildings built between the entered two query years inclusive</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 7" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":VTSearchDlg7" oncomplete="PF('VTSearchDialog7').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">8</td>
+                        <td align="center">Find VT buildings built between the entered two query years inclusive AND whose categories contain the entered query</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 8" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":VTSearchDlg8" oncomplete="PF('VTSearchDialog8').show()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="60" align="center" nowrap="nowrap">9</td>
+                        <td align="center">Find VT buildings whose name OR description OR category OR address contains the entered query</td>
+                        <td width="200" align="center">
+                            <p:commandButton value="Search Type 9" icon="fas fa-search" styleClass="rounded-button"
+                                             update=":VTSearchDlg9" oncomplete="PF('VTSearchDialog9').show()" />
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br /><br />
+            </div>
+        </h:form>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 1 Search
+        **************************************
+        -->
+        <p:dialog position="center center" id="VTSearchDlg1" widgetVar="VTSearchDialog1" modal="true"
+                  resizable="false" appendTo="@(body)" header="Type 1 Search">
+
+            <h:form id="VTSearchForm1">
+                <p:panel>
+                    <h:panelGroup>
+                        <div align="center">
+                            <div class="bottomSpace"><p:outputLabel value="Building Name Contains: " for="name"/></div>
+                            <p:inputText id="name" value="#{buildingController.nameQ}"
+                                         required="true" requiredMessage="Building name query is required!"/>
+                        </div>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup>
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{buildingController.search(1)}"/>
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('VTSearchDialog1').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 2 Search
+        **************************************
+        -->
+        <p:dialog position="center center" id="VTSearchDlg2" widgetVar="VTSearchDialog2" modal="true"
+                  resizable="false" appendTo="@(body)" header="Type 2 Search">
+
+            <h:form id="VTSearchForm2">
+                <p:panel>
+                    <h:panelGroup>
+                        <div align="center">
+                            <div class="bottomSpace"><p:outputLabel value="Building Description Contains: " for="description"/></div>
+                            <p:inputText id="description" value="#{buildingController.descriptionQ}"
+                                         required="true" requiredMessage="Building description query is required!"/>
+                        </div>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup>
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{buildingController.search(2)}"/>
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('VTSearchDialog2').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 3 Search
+        **************************************
+        -->
+        <p:dialog position="center center" id="VTSearchDlg3" widgetVar="VTSearchDialog3" modal="true"
+                  resizable="false" appendTo="@(body)" header="Type 3 Search">
+
+            <h:form id="VTSearchForm3">
+                <p:panel>
+                    <h:panelGroup>
+                        <div align="center">
+                            <div class="bottomSpace"><p:outputLabel value="Building Abbreviation Contains: " for="abbreviation"/></div>
+                            <p:inputText id="abbreviation" value="#{buildingController.abbreviationQ}"
+                                         required="true" requiredMessage="Building abbreviation query is required!"/>
+                        </div>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup>
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{buildingController.search(3)}"/>
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('VTSearchDialog3').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 4 Search
+        **************************************
+        -->
+        <p:dialog position="center center" id="VTSearchDlg4" widgetVar="VTSearchDialog4" modal="true"
+                  resizable="false" appendTo="@(body)" header="Type 4 Search">
+
+            <h:form id="VTSearchForm4">
+                <p:panel>
+                    <h:panelGroup>
+                        <div align="center">
+                            <div class="bottomSpace"><p:outputLabel value="Building Category Contains: " for="category"/></div>
+                            <p:inputText id="category" value="#{buildingController.categoryQ}"
+                                         required="true" requiredMessage="Building category query is required!"/>
+                        </div>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup>
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{buildingController.search(4)}"/>
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('VTSearchDialog4').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 5 Search
+        **************************************
+        -->
+        <p:dialog position="center center" id="VTSearchDlg5" widgetVar="VTSearchDialog5" modal="true"
+                  resizable="false" appendTo="@(body)" header="Type 5 Search">
+
+            <h:form id="VTSearchForm5">
+                <p:panel>
+                    <h:panelGroup>
+                        <div align="center">
+                            <div class="bottomSpace"><p:outputLabel value="Building Address Contains: " for="address"/></div>
+                            <p:inputText id="address" value="#{buildingController.addressQ}"
+                                         required="true" requiredMessage="Building address query is required!"/>
+                        </div>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup>
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{buildingController.search(5)}"/>
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('VTSearchDialog5').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 6 Search
+        **************************************
+        -->
+        <p:dialog position="center center" id="VTSearchDlg6" widgetVar="VTSearchDialog6" modal="true"
+                  resizable="false" appendTo="@(body)" header="Type 6 Search">
+
+            <h:form id="VTSearchForm6">
+                <p:panel>
+                    <h:panelGroup>
+                        <div align="center">
+                            <div class="bottomSpace"><p:outputLabel value="Building Built in Year: " for="yearBuilt"/></div>
+                            <p:inputMask id="yearBuilt" value="#{buildingController.yearBuiltQ}" mask="9999"
+                                         required="true" requiredMessage="Building year built query is required!"/>
+                        </div>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup>
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{buildingController.search(6)}"/>
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('VTSearchDialog6').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 7 Search
+        **************************************
+        -->
+        <p:dialog position="center center" id="VTSearchDlg7" widgetVar="VTSearchDialog7" modal="true"
+                  resizable="false" appendTo="@(body)" header="Type 7 Search">
+
+            <h:form id="VTSearchForm7">
+                <p:panel>
+                    <h:panelGroup>
+                        <div align="center">
+                            <div class="bottomSpace"><p:outputLabel value="Building Built in Year From: " for="yearBuiltFrom"/></div>
+                            <p:inputMask id="yearBuiltFrom" value="#{buildingController.yearBuiltFromQ}" mask="9999"
+                                         required="true" requiredMessage="Building year-built-from query is required!"/>
+                            <br/><br/>
+                            <div class="bottomSpace"><p:outputLabel value="Building Built in Year To: " for="yearBuiltTo"/></div>
+                            <p:inputMask id="yearBuiltTo" value="#{buildingController.yearBuiltToQ}" mask="9999"
+                                         required="true" requiredMessage="Building year-built-to query is required!"/>
+                        </div>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup>
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{buildingController.search(7)}"/>
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('VTSearchDialog7').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 8 Search
+        **************************************
+        -->
+        <p:dialog position="center center" id="VTSearchDlg8" widgetVar="VTSearchDialog8" modal="true"
+                  resizable="false" appendTo="@(body)" header="Type 8 Search">
+
+            <h:form id="VTSearchForm8">
+                <p:panel>
+                    <h:panelGroup>
+                        <div class="bottomSpace"><p:outputLabel value="Building Built in Year From: " for="yearBuiltFrom8"/></div>
+                        <p:inputMask id="yearBuiltFrom8" value="#{buildingController.yearBuiltFromQ}" mask="9999"
+                                     required="true" requiredMessage="Building year-built-from query is required!"/>
+                        <br/><br/>
+                        <div class="bottomSpace"><p:outputLabel value="Building Built in Year To: " for="yearBuiltTo8"/></div>
+                        <p:inputMask id="yearBuiltTo8" value="#{buildingController.yearBuiltToQ}" mask="9999"
+                                     required="true" requiredMessage="Building year-built-to query is required!"/>
+                        <br/><br/>
+                        <div class="bottomSpace"><p:outputLabel value="Building Category Contains: " for="category8"/></div>
+                        <p:inputText id="category8" value="#{buildingController.categoryQ}"
+                                     required="true" requiredMessage="Building category query is required!"/>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup>
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{buildingController.search(8)}"/>
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('VTSearchDialog8').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+        <!--
+        **************************************
+        Dialog pop-up window for Type 9 Search
+        **************************************
+        -->
+        <p:dialog position="center center" id="VTSearchDlg9" widgetVar="VTSearchDialog9" modal="true"
+                  resizable="false" appendTo="@(body)" header="Type 9 Search">
+
+            <h:form id="VTSearchForm9">
+                <p:panel>
+                    <h:panelGroup>
+                        <div align="center">
+                            <div class="bottomSpace"><p:outputLabel value="Building name OR description OR category OR address contains: " for="query9"/></div>
+                            <p:inputText id="query9" value="#{buildingController.eachContainsQ}"
+                                         required="true" requiredMessage="Search query is required!"/>
+                        </div>
+                    </h:panelGroup>
+                    <br/><br/>
+                    <h:panelGroup>
+                        <div align="center">
+                            <!-- SUBMIT button -->
+                            <p:commandButton value="Submit" icon="fas fa-arrow-up" styleClass="rounded-button"
+                                             ajax="false" action="#{buildingController.search(9)}"/>
+                            &nbsp;
+                            <!-- CANCEL button -->
+                            <p:commandButton value="Cancel" icon="fas fa-ban" styleClass="ui-button-outlined"
+                                             onclick="PF('VTSearchDialog9').hide()"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>
+</html>

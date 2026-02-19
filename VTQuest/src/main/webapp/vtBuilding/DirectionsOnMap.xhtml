@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Osman Balci on 2025.10.15
+Copyright © 2025 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- This page is constructed based on the siteTemplate -->
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="title">
+            <!-- Set the page title -->
+            <h:outputText value="Directions on Map" />
+        </ui:define>
+
+        <!-- Create the content for this page below -->
+        <ui:define name="editableContent">
+            <div align="center">
+                <span class="headingText">
+                    #{buildingController.travelModeCapitalized} 
+                    Directions from #{buildingController.startingBuildingName} to
+                    #{buildingController.destinationBuildingName}
+                </span>
+                <br /><br />
+                <!-- 
+                Style the Google Map with id="map" using the 'map' style class defined in
+                siteStyles.css. This style definition is accessed in map.js in creating the map.
+                -->
+                <div id="map" class="map" />
+
+                <!-- Map Center Latitude and Longitude are accessed in map.js -->
+                <h:inputHidden id="vtMapCenterLat" value="#{buildingController.vtMapCenterLatitude()}" />
+                <h:inputHidden id="vtMapCenterLong" value="#{buildingController.vtMapCenterLongitude()}" />
+
+                <!-- The following are accessed in map.js for displaying directions on map -->
+                <h:inputHidden id="startLocationName" value="#{buildingController.startingBuildingName}" />
+                <h:inputHidden id="destinationLocationName" value="#{buildingController.destinationBuildingName}" />
+                <h:inputHidden id="startLocationLat" value="#{buildingController.startingBuildingLat}" />
+                <h:inputHidden id="startLocationLong" value="#{buildingController.startingBuildingLng}" />
+                <h:inputHidden id="destinationLocationLat" value="#{buildingController.destinationBuildingLat}" />
+                <h:inputHidden id="destinationLocationLong" value="#{buildingController.destinationBuildingLng}" />
+
+                <!-- travelMode (e.g: Walking, Driving) is accessed in map.js for displaying directions on map -->
+                <h:inputHidden id="travelMode" value="#{buildingController.travelMode}" />
+            </div>
+
+            <script type="text/javascript">
+                initializeMap();  // Initialize and display a Google Map of VT campus
+            </script>
+            <br />
+            <div align="center">
+                <p:button outcome="/vtBuilding/Directions" value="Back" icon="fas fa-arrow-left" styleClass="ui-button-outlined" />
+            </div>
+            <br />
+        </ui:define>
+    </ui:composition>
+</html>
