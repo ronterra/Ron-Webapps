@@ -1,3 +1,3 @@
-# Ronald Webapp Projects
-some of the cool Webapps I have done!
-I took out "Globals" directory in order to make sure no API keys were used and currently the server is not up and running. 
+# Ronald Projects
+some of the cool Projects/WebappsI have done!
+I took out "Globals" directories(which would not allow the Webapps Correctly) in order to make sure no API keys were used and currently the server is not up and running in order to save funds. 
